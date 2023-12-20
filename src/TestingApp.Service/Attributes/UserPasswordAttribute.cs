@@ -21,15 +21,5 @@ namespace TestingApp.Service.Attributes
             return new ValidationResult("Sizning parolingiz yaroqli emas");
         }
 
-        /*protected ValidationResult IsReliable(object value)
-        {
-            if (value is string password && password.Length >= 8 && password.Any(c => char.IsDigit(c))
-                && password.Any(c => char.IsLetter(c))) ;
-            {
-                return ValidationResult.Success;
-            }
-
-            return new ValidationResult("");
-        }*/
     }
 }
