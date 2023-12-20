@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TestingApp.Domain\TestingApp.Domain.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
   </ItemGroup>
 
 </Project>
