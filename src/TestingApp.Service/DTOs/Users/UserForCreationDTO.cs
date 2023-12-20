@@ -1,8 +1,8 @@
 ﻿using TestingApp.Domain.Enums;
 
-namespace TestingApp.Service.DTOs.UserDTOs;
+namespace TestingApp.Service.DTOs.Users;
 
-public class UserCreationDTO
+public class UserForCreationDTO
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }

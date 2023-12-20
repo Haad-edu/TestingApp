@@ -1,18 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TestingApp.Service.Extantions
+namespace TestingApp.Service.Attributes
 {
     public class FromFileAtribute : ValidationAttribute
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            if(value is IFormFile file)
+            if (value is IFormFile file)
             {
                 string[] extensions = new string[] { ".png", ".jpg", ".gif", ".pptx", ".ppt", ".doc", ".docx" };
                 var extention = Path.GetExtension(file.FileName);

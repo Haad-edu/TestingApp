@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Net.Mail;
 using TestingApp.Domain.Commons;
+using TestingApp.Domain.Entities.Attachments;
 
 namespace TestingApp.Domain.Entities.Quizes;
 

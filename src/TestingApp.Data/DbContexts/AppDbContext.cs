@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Net.Mail;
+using TestingApp.Domain.Entities.Attachments;
 using TestingApp.Domain.Entities.Courses;
 using TestingApp.Domain.Entities.Quizes;
 using TestingApp.Domain.Entities.Users;
@@ -21,6 +21,7 @@ public class AppDbContext : DbContext
     {
 
     }
+
     /// <summary>
     /// Each DbSet<T> property represents a table in the database and
     /// will be used to query and interact with data of the corresponding entity type.
@@ -36,8 +37,6 @@ public class AppDbContext : DbContext
     public virtual DbSet<SolvedQuestion> SolvedQuestions { get; set; }
     public virtual DbSet<User> Users { get; set; }
 
-
-
     /// <summary>
     /// This code configures a unique index on the Email property of the User entity,
     /// enforcing uniqueness for email addresses in the database using Entity Framework Core.
@@ -47,13 +46,8 @@ public class AppDbContext : DbContext
     {
         modelBuilder.Entity<User>().
             HasIndex(u => u.Email).IsUnique(true);
+
         modelBuilder.Entity<Course>().
             HasIndex(c => c.Name).IsUnique(true);
-
-
-
-
     }
-
-
 }
