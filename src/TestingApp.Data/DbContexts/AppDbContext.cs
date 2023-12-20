@@ -17,7 +17,7 @@ public class AppDbContext : DbContext
     /// to be injected into the database context. 
     /// </summary>
     /// <param name="options"></param>
-    public AppDbContext(DbContextOptions<AppDbContext> options)
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
 
     }
@@ -47,6 +47,11 @@ public class AppDbContext : DbContext
     {
         modelBuilder.Entity<User>().
             HasIndex(u => u.Email).IsUnique(true);
+        modelBuilder.Entity<Course>().
+            HasIndex(c => c.Name).IsUnique(true);
+
+
+
 
     }
 
