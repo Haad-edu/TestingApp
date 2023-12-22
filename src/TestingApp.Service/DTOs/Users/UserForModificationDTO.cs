@@ -1,14 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TestingApp.Domain.Enums;
 
 namespace TestingApp.Service.DTOs.Users;
 
-public class UserCreationDTO
+public class UserForModificationDTO
 {
     [MaxLength(64, ErrorMessage = "First Name must be longer than 64 characters")]
     public string FirstName { get; set; }
+
+    [MaxLength(64, ErrorMessage = "First Name must be longer than 64 characters")]
     public string LastName { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
-    public UserRole UserRole { get; set; }
 }
