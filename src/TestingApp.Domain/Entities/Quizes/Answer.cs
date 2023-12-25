@@ -8,6 +8,6 @@ namespace TestingApp.Domain.Entities.Quizes
         public string Option { get; set; }
         public bool IsCorrect { get; set; }
 
-        public int QuestionId { get; set; }
+        public long QuestionId { get; set; }
     }
 }

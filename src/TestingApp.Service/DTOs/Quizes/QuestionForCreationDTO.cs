@@ -6,8 +6,6 @@ namespace TestingApp.Service.DTOs.Quizes;
 
 public class QuestionForCreationDTO
 {
-    public int QuizId { get; set; }
-
     [MaxLength(200)]
     public string Title { get; set; }
 

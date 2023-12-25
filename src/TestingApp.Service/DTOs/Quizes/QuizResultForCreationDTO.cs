@@ -6,9 +6,4 @@ namespace TestingApp.Service.DTOs.Quizes;
 public class QuizResultForCreationDTO
 {
     public int CorrectAnswers { get; set; }
-    public int QuizId { get; set; }
-    public Quiz Quiz { get; set; }
-    public int UserId { get; set; }
-    public User User { get; set; }
-    public ICollection<SolvedQuestion> SolvedQuestions { get; set; }
 }

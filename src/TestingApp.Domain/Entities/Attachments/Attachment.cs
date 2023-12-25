@@ -6,5 +6,5 @@ public class Attachment : Auditable
 {
     public string Path { get; set; }
 
-    public int QuestionId { get; set; }
+    public long QuestionId { get; set; }
 }
