@@ -29,7 +29,7 @@ public class MappingProfile : Profile
 
         //User
         CreateMap<User, UserForCreationDTO>().ReverseMap();
-        CreateMap<User, UserForModificationDTO>().ReverseMap();
+        CreateMap<User, UserForUpdateDTO>().ReverseMap();
         CreateMap<User, UserForViewModelDTO>().ReverseMap();
     }
 }

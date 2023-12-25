@@ -15,7 +15,7 @@ namespace TestingApp.Service.Interfaces.Users
     {
         public Task<UserForViewModelDTO> CreateAsync(UserForCreationDTO userForCreationDTO);
 
-        public Task<UserForViewModelDTO> UpdateAsync(long id, UserForModificationDTO userForUpdateDTO);
+        public Task<UserForViewModelDTO> UpdateAsync(long id, UserForUpdateDTO userForUpdateDTO);
 
         public Task<bool> DeleteAsync(long id);
 

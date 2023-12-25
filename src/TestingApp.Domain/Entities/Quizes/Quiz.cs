@@ -5,8 +5,8 @@ namespace TestingApp.Domain.Entities.Quizes;
 
 public class Quiz : Auditable
 {
-    public int NumberOfQuestions { get; set; }
-    public int CourseId { get; set; }
+    public long NumberOfQuestions { get; set; }
+    public long CourseId { get; set; }
 
     [MaxLength(200)]
     public string Title { get; set; }

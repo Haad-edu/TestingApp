@@ -12,8 +12,8 @@ using TestingApp.Data.DbContexts;
 namespace TestingApp.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231220145432_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20231225145744_InitalCreateMigration")]
+    partial class InitalCreateMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -132,10 +132,7 @@ namespace TestingApp.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
 
-                    b.Property<int>("QuizId")
-                        .HasColumnType("integer");
-
-                    b.Property<long?>("QuizId1")
+                    b.Property<long>("QuizId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Title")
@@ -147,7 +144,7 @@ namespace TestingApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuizId1");
+                    b.HasIndex("QuizId");
 
                     b.ToTable("Questions");
                 });
@@ -160,17 +157,14 @@ namespace TestingApp.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("CourseId")
-                        .HasColumnType("integer");
-
-                    b.Property<long?>("CourseId1")
+                    b.Property<long>("CourseId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("NumberOfQuestions")
-                        .HasColumnType("integer");
+                    b.Property<long>("NumberOfQuestions")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("TimeToSolveInMinutes")
                         .HasColumnType("integer");
@@ -184,7 +178,7 @@ namespace TestingApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId1");
+                    b.HasIndex("CourseId");
 
                     b.ToTable("Quizs");
                 });
@@ -197,32 +191,26 @@ namespace TestingApp.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("CorrectAnswers")
-                        .HasColumnType("integer");
+                    b.Property<long>("CorrectAnswers")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("QuizId")
-                        .HasColumnType("integer");
-
-                    b.Property<long?>("QuizId1")
+                    b.Property<long>("QuizId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.Property<long?>("UserId1")
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuizId1");
+                    b.HasIndex("QuizId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("QuizResults");
                 });
@@ -235,10 +223,7 @@ namespace TestingApp.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("AnswerId")
-                        .HasColumnType("integer");
-
-                    b.Property<long?>("AnswerId1")
+                    b.Property<long>("AnswerId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
@@ -247,16 +232,10 @@ namespace TestingApp.Data.Migrations
                     b.Property<bool>("IsCorrect")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("integer");
-
-                    b.Property<long?>("QuestionId1")
+                    b.Property<long>("QuestionId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("QuizResultId")
-                        .HasColumnType("integer");
-
-                    b.Property<long?>("QuizResultId1")
+                    b.Property<long>("QuizResultId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -264,11 +243,11 @@ namespace TestingApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AnswerId1");
+                    b.HasIndex("AnswerId");
 
-                    b.HasIndex("QuestionId1");
+                    b.HasIndex("QuestionId");
 
-                    b.HasIndex("QuizResultId1");
+                    b.HasIndex("QuizResultId");
 
                     b.ToTable("SolvedQuestions");
                 });
@@ -328,25 +307,33 @@ namespace TestingApp.Data.Migrations
                 {
                     b.HasOne("TestingApp.Domain.Entities.Quizes.Quiz", null)
                         .WithMany("Questions")
-                        .HasForeignKey("QuizId1");
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TestingApp.Domain.Entities.Quizes.Quiz", b =>
                 {
                     b.HasOne("TestingApp.Domain.Entities.Courses.Course", null)
                         .WithMany("Quizes")
-                        .HasForeignKey("CourseId1");
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TestingApp.Domain.Entities.Quizes.QuizResult", b =>
                 {
                     b.HasOne("TestingApp.Domain.Entities.Quizes.Quiz", "Quiz")
                         .WithMany()
-                        .HasForeignKey("QuizId1");
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("TestingApp.Domain.Entities.Users.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Quiz");
 
@@ -357,15 +344,21 @@ namespace TestingApp.Data.Migrations
                 {
                     b.HasOne("TestingApp.Domain.Entities.Quizes.Answer", "Answer")
                         .WithMany()
-                        .HasForeignKey("AnswerId1");
+                        .HasForeignKey("AnswerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("TestingApp.Domain.Entities.Quizes.Question", "Question")
                         .WithMany()
-                        .HasForeignKey("QuestionId1");
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("TestingApp.Domain.Entities.Quizes.QuizResult", null)
                         .WithMany("SolvedQuestions")
-                        .HasForeignKey("QuizResultId1");
+                        .HasForeignKey("QuizResultId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Answer");
 
