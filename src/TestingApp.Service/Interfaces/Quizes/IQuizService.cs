@@ -12,7 +12,9 @@ public interface IQuizService
 
     ValueTask<bool> DeleteAsync(int id);
 
-    ValueTask<IEnumerable<QuizForViewDTO>> GetAllAsync( Expression<Func<Quiz, bool>> expression = null);
+    ValueTask<IEnumerable<QuizForViewDTO>> GetAllAsync(
+        PaginationParams @params,
+        Expression<Func<Quiz, bool>> expression = null);
 
     ValueTask<QuizForViewDTO> GetAsync(Expression<Func<Quiz, bool>> expression);
 
