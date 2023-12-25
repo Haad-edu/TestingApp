@@ -1,11 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using TestingApp.Domain.Entities.Attachments;
-using TestingApp.Domain.Entities.Quizes;
+﻿
+
+using System.ComponentModel.DataAnnotations;
 
 namespace TestingApp.Service.DTOs.Quizes;
 
-public class QuestionForCreationDTO
+public class QuestionForUpdateDTO
 {
+    public int Id { get; set; }
+
     public int QuizId { get; set; }
 
     [MaxLength(200)]
