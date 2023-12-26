@@ -7,11 +7,11 @@ public interface IQuestionService
 {
     public Task<QuestionForViewModelDTO> CreateAsync(QuestionForCreationDTO questionForCreation);
 
-    public Task<QuestionForViewModelDTO> UpdateAsync(QuestionForCreationDTO questionForCreationDTO);
+    public Task<QuestionForViewModelDTO> UpdateAsync(long id, QuestionForCreationDTO questionForCreationDTO);
 
-    public Task<bool> DeleteAsync(int id);
+    public Task<bool> DeleteAsync(long id);
 
-    public Task<QuestionForViewModelDTO> GetAsync(int id);
+    public Task<QuestionForViewModelDTO> GetAsync(long id);
 
     public Task<IEnumerable<QuestionForViewModelDTO>> GetAllAsync(PaginationParams @params);
 }
