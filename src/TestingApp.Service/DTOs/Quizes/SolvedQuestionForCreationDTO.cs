@@ -2,7 +2,7 @@
 
 namespace TestingApp.Service.DTOs.Quizes;
 
-public class SolvedQuestionDTO
+public class SolvedQuestionForCreationDTO
 {
     public bool IsCorrect { get; set; }
 }

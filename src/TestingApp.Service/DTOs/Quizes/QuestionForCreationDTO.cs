@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TestingApp.Domain.Entities.Attachments;
-using TestingApp.Domain.Entities.Quizes;
 
 namespace TestingApp.Service.DTOs.Quizes;
 

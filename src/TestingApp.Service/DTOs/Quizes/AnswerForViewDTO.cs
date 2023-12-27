@@ -1,7 +1,8 @@
 ﻿namespace TestingApp.Service.DTOs.Quizes;
-
-public class AnswerForCreationDTO
+public class AnswerForViewDTO
 {
+    public int Id { get; set; }
+
     public string Content { get; set; }
 
     public string Option { get; set; }

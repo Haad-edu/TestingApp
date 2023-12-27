@@ -25,7 +25,7 @@ public class MappingProfile : Profile
         CreateMap<Answer, AnswerForCreationDTO>().ReverseMap();
 
         //SolvetQuestion
-        CreateMap<SolvedQuestion, SolvedQuestionDTO>().ReverseMap();
+        CreateMap<SolvedQuestion, SolvedQuestionForCreationDTO>().ReverseMap();
 
         //User
         CreateMap<User, UserForCreationDTO>().ReverseMap();
