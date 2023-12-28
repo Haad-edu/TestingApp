@@ -23,11 +23,11 @@ namespace TestingApp.Service.Interfaces.Users
             PaginationParams @params,
             Expression<Func<User, bool>> expression = null);
 
-        public Task<IEnumerable<UserForViewModelDTO>> GetAllByDegreeAndFullNameAsync(PaginationParams paginationParams, string degree, string fullName);
-
         public Task<UserForViewModelDTO> GetAsync(Expression<Func<User, bool>> expression);
 
         public Task<bool> ChangeRoleAsync(long id, UserRole userRole);
+
+        public Task<bool> ChangePasswordAsync(UserForChangePasswordDTO userForChangePassword);
 
     }
 }
