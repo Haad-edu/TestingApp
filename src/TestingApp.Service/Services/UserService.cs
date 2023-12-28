@@ -43,7 +43,9 @@ public class UserService : IUserService
         return true;
     }
 
-    public async Task<IEnumerable<UserForViewModelDTO>> GetAllAsync(PaginationParams @params, Expression<Func<User, bool>> expression = null)
+    public async Task<IEnumerable<UserForViewModelDTO>> GetAllAsync(PaginationParams @params,
+        Expression<Func<User,
+            bool>> expression = null)
     {
         var users = _repository.GetAll(expression: expression, isTracking: false);
 
@@ -68,8 +70,8 @@ public class UserService : IUserService
             throw new TestingAppException(404, "User not found ");
         }
         existUser.UpdatedAt = DateTime.UtcNow;
-         // I could not solve that
-        // existUser = _repository.Update(_mapper.Map(userForUpdateDTO, existUser));
+
+        existUser = await _repository.Update(_mapper.Map(userForUpdateDTO, existUser));
         return _mapper.Map<UserForViewModelDTO>(existUser);
     }
     public Task<bool> ChangeRoleAsync(long id, UserRole userRole)
