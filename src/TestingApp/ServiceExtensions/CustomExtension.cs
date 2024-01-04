@@ -1,6 +1,9 @@
-﻿namespace TestingApp.ServiceExtensions
+﻿namespace TestingApp.ServiceExtensions;
+public static class CustomExtension
 {
-    public class CustomExtension
+   public static void AddCustomServices(this  IServiceCollection services)
     {
+        
     }
+    
 }

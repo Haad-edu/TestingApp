@@ -33,7 +33,7 @@ public class QuizService : IQuizService
         return mapper.Map<QuizForViewDTO>(Quizs);
     }
 
-    public async Task<bool> DeleteAsync(int Id)
+    public async Task<bool> DeleteAsync(long Id)
     {
         var existQuiz = await quizRepository.DeleteAsync(i => i.Id == Id);
 
@@ -65,7 +65,7 @@ public class QuizService : IQuizService
 
     }
 
-    public async Task<QuizForViewDTO> UpdateAsync(int Id,QuizForCreationDTO Updatequiz)
+    public async Task<QuizForViewDTO> UpdateAsync(long Id,QuizForCreationDTO Updatequiz)
     {
         var ExistQuiz = await quizRepository.GetAsync(u => u.Id == Id);
 
