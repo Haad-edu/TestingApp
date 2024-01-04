@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\Courses\" />
-    <Folder Include="Interfaces\Quizes\" />
   </ItemGroup>
 
 </Project>

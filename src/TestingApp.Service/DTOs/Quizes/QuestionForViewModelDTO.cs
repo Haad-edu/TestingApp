@@ -12,10 +12,8 @@ namespace TestingApp.Service.DTOs.Quizes
     {
         public int Id { get; set; }
 
-        [MaxLength(200)]
         public string Title { get; set; }
 
-        [MaxLength(500)]
         public string Description { get; set; }
     }
 }
