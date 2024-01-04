@@ -7,7 +7,7 @@ using TestingApp.Service.Exceptions;
 using TestingApp.Service.Extensions;
 using TestingApp.Service.Interfaces.Question;
 
-namespace TestingApp.Service.Services;
+namespace TestingApp.Service.Services.QuizServices;
 public class QuestionService : IQuestionService
 {
     public readonly IGenericRepository<Question> genericRepository;
@@ -39,13 +39,13 @@ public class QuestionService : IQuestionService
 
     public async Task<IEnumerable<QuestionForViewModelDTO>> GetAllAsync(PaginationParams @params)
     {
-        var result = await Task.FromResult(genericRepository.GetAll(expression: null, includes: new string[] { "Answers", "Attachments"}, isTracking: false));
+        var result = await Task.FromResult(genericRepository.GetAll(expression: null, includes: new string[] { "Answers", "Attachments" }, isTracking: false));
         return mapper.Map<List<QuestionForViewModelDTO>>(result.ToPagedList(@params).ToList());
     }
 
     public async Task<QuestionForViewModelDTO> GetAsync(long id)
     {
-        var result = await genericRepository.GetAsync(x => x.Id == id, new string[] { "Answers", "Attachments"});
+        var result = await genericRepository.GetAsync(x => x.Id == id, new string[] { "Answers", "Attachments" });
         if (result is null)
             throw new HttpException("Question is  not found", 404);
 
