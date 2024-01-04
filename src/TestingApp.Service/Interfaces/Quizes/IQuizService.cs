@@ -10,7 +10,7 @@ public interface IQuizService
 
     Task<QuizForViewDTO> UpdateAsync(int Id,QuizForCreationDTO Updatequiz);
 
-    Task<bool> Delete(int Id);
+    Task<bool> DeleteAsync(int Id);
 
     ValueTask<IEnumerable<QuizForViewDTO>> GetAllAsync(
            PaginationParams @params,
