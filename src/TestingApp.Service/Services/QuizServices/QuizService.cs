@@ -33,7 +33,7 @@ public class QuizService : IQuizService
         return mapper.Map<QuizForViewDTO>(Quizs);
     }
 
-    public async Task<bool> Delete(int Id)
+    public async Task<bool> DeleteAsync(int Id)
     {
         var existQuiz = await quizRepository.DeleteAsync(i => i.Id == Id);
 
@@ -51,7 +51,7 @@ public class QuizService : IQuizService
         //var pagedQuizzes = await Quizes.ToPagedList(@params).ToListAsync();
 
 
-        return mapper.Map<IEnumerable<QuizForViewDTO>>(await Quizes.ToPagedList(IQueryable<expression>, @params)
+        return mapper.Map<IEnumerable<QuizForViewDTO>>(await Quizes.ToPagedList(@params)
             .ToListAsync());
     }
 
