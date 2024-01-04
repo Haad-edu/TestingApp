@@ -9,12 +9,12 @@ using TestingApp.Service.Exceptions;
 using TestingApp.Service.Extensions;
 using TestingApp.Service.Interfaces.Users;
 
-namespace TestingApp.Service.Services;
+namespace TestingApp.Service.Services.Users;
 
 public class AuthService : IAuthService
 {
-   
-        private readonly IGenericRepository<User> userRepository;
+
+    private readonly IGenericRepository<User> userRepository;
     private readonly IConfiguration configuration;
 
     public AuthService(IGenericRepository<User> userRepository, IConfiguration configuration)
@@ -30,7 +30,7 @@ public class AuthService : IAuthService
         if (user is null)
             throw new TestingAppException(400, "Login or Password is incorrect");
 
-       
+
         JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
 
         byte[] tokenKey = Encoding.UTF8.GetBytes(configuration["JWT:Key"]);
@@ -49,6 +49,6 @@ public class AuthService : IAuthService
         var token = tokenHandler.CreateToken(tokenDescription);
 
         return tokenHandler.WriteToken(token);
-        
+
     }
 }
