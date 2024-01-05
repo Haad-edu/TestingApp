@@ -31,7 +31,7 @@ public class QuestionService : IQuestionService
     {
         var getResult = await genericRepository.GetAsync(x => x.Id == id);
         if (getResult is null)
-            throw new HttpException("Question is not found", 404);
+            throw new TestingAppException(404, "Question is not found");
 
         await genericRepository.DeleteAsync(x => x.Id == id);
         return true;
@@ -47,7 +47,7 @@ public class QuestionService : IQuestionService
     {
         var result = await genericRepository.GetAsync(x => x.Id == id, new string[] { "Answers", "Attachments" });
         if (result is null)
-            throw new HttpException("Question is  not found", 404);
+            throw new TestingAppException(404, "Question is  not found");
 
         return mapper.Map<QuestionForViewModelDTO>(result);
     }
@@ -56,7 +56,7 @@ public class QuestionService : IQuestionService
     {
         var result = await GetAsync(id);
         if (result is null)
-            throw new HttpException("Question is  not found", 404);
+            throw new TestingAppException(404, "Question is  not found");
 
         var resultMap = mapper.Map<Question>(questionForCreationDTO);
         resultMap.Id = id;
