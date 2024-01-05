@@ -28,7 +28,7 @@ public class AuthService : IAuthService
             u.Email == email && u.Password.Equals(password.Encrypt()));
 
         if (user is null)
-            throw new TestingAppException(400,"Login or Password is incorrect");
+            throw new TestingAppException(400, "Login or Password is incorrect");
 
        
         JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
