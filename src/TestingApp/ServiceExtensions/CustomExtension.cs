@@ -1,4 +1,5 @@
-﻿namespace TestingApp.ServiceExtensions
+﻿
+namespace TestingApp.ServiceExtensions
 {
     public class CustomExtension
     {
