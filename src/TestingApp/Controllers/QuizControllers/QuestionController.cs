@@ -4,7 +4,7 @@ using TestingApp.Service.DTOs.Quizes;
 using TestingApp.Service.Interfaces.Question;
 
 namespace TestingApp.Controllers.QuizControllers;
-[Route("controller")]
+[Route("api/[controller]")]
 [ApiController]
 public class QuestionController : ControllerBase
 {
@@ -15,27 +15,27 @@ public class QuestionController : ControllerBase
         this.questionService = questionService;
     }
 
-    [HttpPost]
+    [HttpPost] // mana shu 2 tasi conflict beradi men chiqdim
     public async ValueTask<IActionResult> CreateAsync(QuestionForCreationDTO quizForCreation)
         => Ok(await questionService.CreateAsync(quizForCreation));
 
 
-    [HttpPut("{id}")]
+    [HttpPut("Id")]
     public async ValueTask<IActionResult> UpdateAsync(long Id, QuestionForCreationDTO QuizforUpdate)
         => Ok(await questionService.UpdateAsync(Id, QuizforUpdate));
 
 
-    [HttpPost]
+    [HttpGet]
     public async ValueTask<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
-        =>Ok(await questionService.GetAllAsync(@params));
+        => Ok(await questionService.GetAllAsync(@params));
 
-    
-    [HttpPost("{id}")]
+
+    [HttpGet("Id")]
     public async ValueTask<IActionResult> GetAsync([FromRoute] long Id)
-        =>Ok(await questionService.GetAsync(Id));
+        => Ok(await questionService.GetAsync(Id));
 
-    
-    [HttpDelete("{id}")]
+
+    [HttpDelete("Id")]
     public async ValueTask<IActionResult> DeleteAsync(long Id)
         => Ok(await questionService.DeleteAsync(Id));
 

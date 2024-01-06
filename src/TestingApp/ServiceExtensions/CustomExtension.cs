@@ -30,7 +30,6 @@ public static class CustomExtension
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUserService, UserService>();
 
-
     }
 
 }

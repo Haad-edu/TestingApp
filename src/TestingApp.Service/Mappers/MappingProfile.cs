@@ -14,12 +14,20 @@ public class MappingProfile : Profile
     {
         //Course
         CreateMap<Course, CourseForCreationDTO>().ReverseMap();
-
+        
         //Quizes
         CreateMap<Quiz, QuizForCreationDTO>().ReverseMap();
+        CreateMap<Quiz, QuizForViewDTO>().ReverseMap();
+
+        //question
+        CreateMap<Question, QuestionForCreationDTO>().ReverseMap();
+        CreateMap<Question, QuestionForViewModelDTO>().ReverseMap();
+
 
         //QuizResult
         CreateMap<QuizResult, QuizResultForCreationDTO>().ReverseMap();
+        CreateMap<QuizResult, QuizForViewDTO>().ReverseMap();
+
 
         //Answer
         CreateMap<Answer, AnswerForCreationDTO>().ReverseMap();
