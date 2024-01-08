@@ -1,3 +1,4 @@
+﻿
 ﻿using TestingApp.Data.GenericRepositories;
 using TestingApp.Data.IGenericRepositories;
 using TestingApp.Domain.Entities.Attachments;
@@ -8,6 +9,7 @@ using TestingApp.Service.Interfaces.Question;
 using TestingApp.Service.Interfaces.Quizes;
 using TestingApp.Service.Interfaces.Users;
 using TestingApp.Service.Services.QuizServices;
+using TestingApp.Service.Services.Quizzes;
 using TestingApp.Service.Services.Users;
 
 namespace TestingApp.ServiceExtensions;
@@ -25,10 +27,11 @@ public static class CustomExtension
         services.AddScoped<IGenericRepository<Attachment>, GenericRepository<Attachment>>();
 
         //Services
-        services.AddScoped<IQuestionService , QuestionService>();
         services.AddScoped<IQuizService, QuizService>();
+        services.AddScoped<IQuestionService , QuestionService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IAnswerService, AnswerService>();
 
     }
 

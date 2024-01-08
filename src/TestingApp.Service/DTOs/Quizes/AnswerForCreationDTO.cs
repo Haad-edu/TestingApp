@@ -1,8 +1,11 @@
-﻿namespace TestingApp.Service.DTOs.Quizes;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TestingApp.Service.DTOs.Quizes;
 
 public class AnswerForCreationDTO
 {
-    public string Content { get; set; }
-    public string Option { get; set; }
-    public bool IsCorrect { get; set; }
+    public required string Content { get; set; }
+    [MaxLength(2)]
+    public required string Option { get; set; }
+    public  bool IsCorrect { get; set; }
 }
