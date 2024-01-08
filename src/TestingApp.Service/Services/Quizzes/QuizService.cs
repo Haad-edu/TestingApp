@@ -10,6 +10,8 @@ using TestingApp.Service.Extensions;
 using TestingApp.Service.Interfaces.Quizes;
 
 namespace TestingApp.Service.Services.QuizServices;
+
+#pragma warning disable
 public class QuizService : IQuizService
 {
     private readonly IMapper mapper;

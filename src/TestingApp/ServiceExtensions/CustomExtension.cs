@@ -13,7 +13,7 @@ using TestingApp.Service.Services.Users;
 namespace TestingApp.ServiceExtensions;
 public static class CustomExtension
 {
-   public static void AddCustomServices(this  IServiceCollection services)
+   public static void AddCustomServices(this IServiceCollection services)
     {
         //Repositories
         services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();
