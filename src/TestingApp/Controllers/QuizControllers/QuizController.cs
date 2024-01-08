@@ -6,7 +6,7 @@ using TestingApp.Service.Interfaces.Quizes;
 
 namespace TestingApp.Controllers.QuizControllers;
 
-[Route("Controller")]
+[Route("api/[controller]")]
 [ApiController]
 public class QuizController : ControllerBase
 {
@@ -22,8 +22,8 @@ public class QuizController : ControllerBase
            => Ok(await quizService.CreateAsync(quizForCreationDTO));
 
 
-    [HttpPut("{id}")]
-    public async ValueTask<IActionResult> UpdateAsync(int id, QuizForCreationDTO quizForUpdateDTO)
+    [HttpPut("Id")]
+    public async ValueTask<IActionResult> UpdateAsync(long id, QuizForCreationDTO quizForUpdateDTO)
            => Ok(await quizService.UpdateAsync(id, quizForUpdateDTO));
 
 
@@ -32,12 +32,12 @@ public class QuizController : ControllerBase
            => Ok(await quizService.GetAllAsync(@params));
 
 
-    [HttpGet("{id}")]
-    public async ValueTask<IActionResult> GetAsync([FromRoute] int id)
+    [HttpGet("Id")]
+    public async ValueTask<IActionResult> GetAsync([FromRoute] long id)
           => Ok(await quizService.GetAsync(u => u.Id == id));
     
     
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync([FromRoute] int id)
+    [HttpDelete("Id")]
+    public async Task<IActionResult> DeleteAsync([FromRoute] long id)
            => Ok(await quizService.DeleteAsync(id));
 }
