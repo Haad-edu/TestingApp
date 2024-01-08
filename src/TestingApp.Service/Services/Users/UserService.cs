@@ -16,6 +16,7 @@ public class UserService : IUserService
 {
     private readonly IMapper _mapper;
     private readonly IGenericRepository<User> _repository;
+
     public UserService(IGenericRepository<User> repository, IMapper mapper)
     {
         mapper = _mapper;
@@ -24,11 +25,11 @@ public class UserService : IUserService
 
     public async Task<UserForViewModelDTO> CreateAsync(UserForCreationDTO userForCreationDTO)
     {
-        var existUser = await _repository.GetAsync(u => u.Email == userForCreationDTO.Email);
+        /*var existUser = await _repository.GetAsync(u => u.Email == userForCreationDTO.Email);
         if (existUser != null)
         {
             throw new TestingAppException(400, "User with that Email already exist");
-        }
+        }*/
         userForCreationDTO.Password = userForCreationDTO.Password.Encrypt();
         var user = await _repository.CreateAsync(_mapper.Map<User>(userForCreationDTO));
         return _mapper.Map<UserForViewModelDTO>(user);
