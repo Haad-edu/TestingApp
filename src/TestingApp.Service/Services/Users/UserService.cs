@@ -22,7 +22,6 @@ public class UserService : IUserService
         repository = _repository;
     }
 
-
     public async Task<UserForViewModelDTO> CreateAsync(UserForCreationDTO userForCreationDTO)
     {
         var existUser = await _repository.GetAsync(u => u.Email == userForCreationDTO.Email);
