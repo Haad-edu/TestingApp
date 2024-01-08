@@ -26,7 +26,7 @@ public class AnswerService : IAnswerService
         
         if(isCreated != null)
         {
-            throw new TestingAppException(404, "Answer is not found!");
+            throw new TestingAppException(404, "Answer is already exsist!");
         }
         var anwer = await _repository.CreateAsync(_mapper.Map<Answer>(answerForCreationDTO));
 
@@ -57,9 +57,9 @@ public class AnswerService : IAnswerService
         bool>> expression)
     {
         var answer = await _repository.GetAsync(expression);
-        if(answer == null)
+        if(answer == null && answer.IsCorrect == false)
         {
-            throw new TestingAppException(404, "Answer not found!");
+            throw new TestingAppException(404, "Answer is not correct!");
         }
 
         return _mapper.Map<AnswerForViewDTO>(answer);
