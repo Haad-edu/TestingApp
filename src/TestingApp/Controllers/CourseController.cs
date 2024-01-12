@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TestingApp.Domain.Configurations;
 using TestingApp.Service.DTOs.Courses;
 using TestingApp.Service.Interfaces.Courses;
@@ -23,7 +24,6 @@ public class CourseController : ControllerBase
     [HttpPut("{id}")]
     public async ValueTask<IActionResult> UpdateAsync(long id, CourseForCreationDTO courseForUpdateDTO)
            => Ok(await courseService.UpdateAsync(id, courseForUpdateDTO));
-
 
     [HttpGet]
     public async ValueTask<IActionResult> GetAll([FromQuery] PaginationParams @params)

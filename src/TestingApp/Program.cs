@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Serilog;
 using TestingApp.Data.DbContexts;
 using TestingApp.Service.Mappers;
@@ -13,6 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Register services
 // Serilog
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
@@ -21,9 +23,15 @@ var logger = new LoggerConfiguration()
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
-
 builder.Services.AddCustomServices();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+//Register Jwt
+builder.Services.ConfigureJwt(builder.Configuration);
+
+// Register Swagger Service
+builder.Services.AddSwaggerService();
+
+// Register Automapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
