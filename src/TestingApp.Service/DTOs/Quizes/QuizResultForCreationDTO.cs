@@ -5,5 +5,7 @@ namespace TestingApp.Service.DTOs.Quizes;
 
 public class QuizResultForCreationDTO
 {
-    public int CorrectAnswers { get; set; }
+    public int QuizId { get; set; }
+    public int UserId { get; set; }
+    public ICollection<SolvedQuestionForCreation> SolvedQuestions { get; set; }
 }

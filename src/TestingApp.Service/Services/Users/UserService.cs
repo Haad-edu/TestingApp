@@ -16,12 +16,12 @@ public class UserService : IUserService
 {
     private readonly IMapper _mapper;
     private readonly IGenericRepository<User> _repository;
+
     public UserService(IGenericRepository<User> repository, IMapper mapper)
     {
         mapper = _mapper;
         repository = _repository;
     }
-
 
     public async Task<UserForViewModelDTO> CreateAsync(UserForCreationDTO userForCreationDTO)
     {
