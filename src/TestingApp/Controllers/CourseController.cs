@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TestingApp.Domain.Configurations;
+using TestingApp.Helpers;
 using TestingApp.Service.DTOs.Courses;
 using TestingApp.Service.Interfaces.Courses;
 
@@ -16,19 +17,17 @@ public class CourseController : ControllerBase
         this.courseService = courseService;
     }
 
-    [HttpPost]
+    [HttpPost, Authorize(Roles = CustomRoles.TEACHER_ROLE)]
     public async ValueTask<IActionResult> CreateAsync(CourseForCreationDTO courseForCreationDTO)
           => Ok(await courseService.CreateAsync(courseForCreationDTO));
 
-
-    [HttpPut("{id}")]
+    [HttpPut("{id}"), Authorize(Roles = CustomRoles.TEACHER_ROLE)]
     public async ValueTask<IActionResult> UpdateAsync(long id, CourseForCreationDTO courseForUpdateDTO)
            => Ok(await courseService.UpdateAsync(id, courseForUpdateDTO));
 
     [HttpGet]
     public async ValueTask<IActionResult> GetAll([FromQuery] PaginationParams @params)
            => Ok(await courseService.GetAllAsync(@params));
-
 
     [HttpGet("{id}")]
     public async ValueTask<IActionResult> GetAsync([FromRoute] long id)
