@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Serilog;
 using TestingApp.Data.DbContexts;
 using TestingApp.Service.Mappers;
 using TestingApp.ServiceExtensions;
+using TestingSystem.Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Register services
+// Serilog
+var logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
+
 builder.Services.AddCustomServices();
 
 //Register Jwt
@@ -40,6 +50,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapControllers();
 
