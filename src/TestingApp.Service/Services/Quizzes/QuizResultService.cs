@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using TestingApp.Data.IGenericRepositories;
 using TestingApp.Domain.Configurations;
@@ -6,6 +7,7 @@ using TestingApp.Domain.Entities.Quizes;
 using TestingApp.Domain.Entities.Users;
 using TestingApp.Service.DTOs.Quizes;
 using TestingApp.Service.Exceptions;
+using TestingApp.Service.Extensions;
 using TestingApp.Service.Interfaces.Quizes;
 
 namespace TestingApp.Service.Services.Quizzes;
@@ -49,10 +51,10 @@ public class QuizResultService : IQuizResultService
             var answer = await answerRepository.GetAsync(a => a.Id == i.AnswerId);
 
             if (question.QuizId != quiz.Id)
-                throw new TestingAppException(404, "quiz does not have such question");
+                throw new TestingAppException(404, "quiz doesn't contains such a question");
 
             if (answer.QuestionId != question.Id)
-                throw new TestingAppException(404, "question does not have such answer");
+                throw new TestingAppException(404, "question doesn't contains. such answer");
 
             if (answer.IsCorrect)
                 quizResult.CorrectAnswers++;
@@ -64,9 +66,10 @@ public class QuizResultService : IQuizResultService
         return mapper.Map<QuizResultForViewDTO>(quizResult);
     }
 
-    public Task<IEnumerable<QuizResultForViewDTO>> GetAllAsync(PaginationParams @params, Expression<Func<QuizResult, bool>> expression = null)
+    public async Task<IEnumerable<QuizResultForViewDTO>> GetAllAsync(PaginationParams @params, Expression<Func<QuizResult, bool>> expression = null)
     {
-        throw new NotImplementedException();
+        var quizResults = quizResultRepository.GetAll(expression: expression, isTracking: false, includes: new string[] { "User", "Quiz" });
+        return mapper.Map<List<QuizResultForViewDTO>>(await quizResults.ToPagedList(@params).ToListAsync());
     }
 
     public async Task<QuizResultForViewDTO> GetAsync(Expression<Func<QuizResult, bool>> expression = null)

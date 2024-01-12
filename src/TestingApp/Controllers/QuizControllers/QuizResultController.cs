@@ -21,7 +21,7 @@ public class QuizResultController : ControllerBase
     /// <param name="courseForCreationDTO"></param>
     /// <returns></returns>
 
-    [HttpPost, Authorize(Roles = "Teacher")]
+    [HttpPost]
     public async ValueTask<IActionResult> CreateAsync(QuizResultForCreationDTO courseForCreationDTO)
         => Ok(await quizResultService.CreateAsync(courseForCreationDTO));
 
@@ -35,11 +35,11 @@ public class QuizResultController : ControllerBase
         => Ok(await quizResultService.GetAsync(u => u.Id == id));
 
     /// <summary>
-    /// Eveyone can see
+    /// only teacher can see
     /// </summary>
     /// <param name="params"></param>
     /// <returns></returns>
-    [HttpGet]
+    [HttpGet,Authorize(Roles = "Teacher,Admin")]
     public async ValueTask<IActionResult> GetAll([FromQuery] PaginationParams @params)
        => Ok(await quizResultService.GetAllAsync(@params));
 }
