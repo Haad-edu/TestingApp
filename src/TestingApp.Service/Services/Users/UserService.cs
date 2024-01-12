@@ -16,8 +16,8 @@ public class UserService : IUserService
 {
     private readonly IGenericRepository<User> repository;
     private readonly IMapper mapper;
-
-    public UserService(IGenericRepository<User> repository, IMapper mapper)
+    
+    public UserService(IGenericRepository<User> repository, IMapper mapper, IAuthService authService)
     {
         this.mapper = mapper;
         this.repository = repository;
