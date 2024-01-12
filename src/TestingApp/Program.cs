@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("WebApplication",configurePolicy:policyBuilder =>
     {
-        policyBuilder.WithOrigins();
+        policyBuilder.WithOrigins("http://localhost:7006");
         policyBuilder.AllowAnyHeader();
         policyBuilder.AllowAnyMethod();
         policyBuilder.AllowCredentials();
