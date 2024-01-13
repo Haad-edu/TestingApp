@@ -16,23 +16,35 @@ public class UserService : IUserService
 {
     private readonly IMapper _mapper;
     private readonly IGenericRepository<User> _repository;
+    private readonly IAuthService _authService;
 
-    public UserService(IGenericRepository<User> repository, IMapper mapper)
+    public UserService(IGenericRepository<User> repository, IMapper mapper, IAuthService authService)
     {
         mapper = _mapper;
         repository = _repository;
+        _authService = authService;
     }
 
     public async Task<UserForViewModelDTO> CreateAsync(UserForCreationDTO userForCreationDTO)
     {
-        /*var existUser = await _repository.GetAsync(u => u.Email == userForCreationDTO.Email);
+        var existUser = await _repository.GetAsync(u => u.Email == userForCreationDTO.Email);
         if (existUser != null)
         {
             throw new TestingAppException(400, "User with that Email already exist");
-        }*/
+        }
+
+        // Hashing the password
         userForCreationDTO.Password = userForCreationDTO.Password.Encrypt();
+
         var user = await _repository.CreateAsync(_mapper.Map<User>(userForCreationDTO));
-        return _mapper.Map<UserForViewModelDTO>(user);
+
+        if (user != null) 
+        {
+            // Generating Token Useng Authoservice
+            await _authService.GenerateToken(userForCreationDTO.Email, userForCreationDTO.Password);
+        }
+
+       return _mapper.Map<UserForViewModelDTO>(user);
     }
 
     public async Task<bool> DeleteAsync(long id)

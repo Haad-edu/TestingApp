@@ -32,6 +32,7 @@ public static class CustomExtension
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IAnswerService, AnswerService>();
+        services.AddScoped<IQuizResultService, QuizResultService>();
 
     }
 
