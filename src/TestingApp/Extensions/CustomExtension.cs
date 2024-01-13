@@ -5,9 +5,11 @@ using TestingApp.Domain.Entities.Attachments;
 using TestingApp.Domain.Entities.Courses;
 using TestingApp.Domain.Entities.Quizes;
 using TestingApp.Domain.Entities.Users;
+using TestingApp.Service.Interfaces.Courses;
 using TestingApp.Service.Interfaces.Question;
 using TestingApp.Service.Interfaces.Quizes;
 using TestingApp.Service.Interfaces.Users;
+using TestingApp.Service.Services.Courses;
 using TestingApp.Service.Services.QuizServices;
 using TestingApp.Service.Services.Quizzes;
 using TestingApp.Service.Services.Users;
@@ -32,7 +34,6 @@ public static class CustomExtension
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IAnswerService, AnswerService>();
-        services.AddScoped<IQuizResultService, QuizResultService>();
 
     }
 
