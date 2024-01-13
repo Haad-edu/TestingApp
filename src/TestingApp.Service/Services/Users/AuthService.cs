@@ -13,7 +13,6 @@ namespace TestingApp.Service.Services.Users;
 
 public class AuthService : IAuthService
 {
-
     private readonly IGenericRepository<User> userRepository;
     private readonly IConfiguration configuration;
 
@@ -42,7 +41,7 @@ public class AuthService : IAuthService
                     new Claim("Id", user.Id.ToString()),
                     new Claim(ClaimTypes.Role, user.UserRole.ToString())
             }),
-            Expires = DateTime.UtcNow.AddMonths(int.Parse(configuration["JWT:Lifetime"])),
+            Expires = DateTime.UtcNow.AddDays(int.Parse(configuration["JWT:Lifetime"])),
             Issuer = configuration["JWT:Issuer"],
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
         };

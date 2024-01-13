@@ -33,7 +33,6 @@ public class UserService : IUserService
             throw new TestingAppException(400, "User with that Email already exist");
         }
 
-        // Hashing the password
         userForCreationDTO.Password = userForCreationDTO.Password.Encrypt();
 
         var user = await _repository.CreateAsync(_mapper.Map<User>(userForCreationDTO));
